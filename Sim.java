@@ -11,7 +11,7 @@ public class Sim extends Frame{
     boolean simStatus = false; //true - sim is executing, false - sim is not executing
     Menu menu = new Menu(this);
     long prevTime;
-    private BufferedImage buffer = new BufferedImage(750, 750, BufferedImage.TYPE_4BYTE_ABGR);
+    final BufferedImage buffer = new BufferedImage(750, 750, BufferedImage.TYPE_4BYTE_ABGR);
     
     public Sim(){
         //initialize frame and exit function
@@ -32,17 +32,25 @@ public class Sim extends Frame{
         });
         setVisible(true);
 
-        prevTime = System.nanoTime(); ////////////////////////////////////////////////////////
+        prevTime = System.nanoTime();
 
         //loop
         new Timer().scheduleAtFixedRate(new TimerTask(){
             @Override
             public void run(){
-                long currentTime = System.nanoTime();
-                double dt = (currentTime - prevTime) / 1e9;
-                prevTime = currentTime;
+                if(simStatus == true){
+                    long currentTime = System.nanoTime();
+                    double dt = (currentTime - prevTime) / 1e9;
+                    prevTime = currentTime;
 
-                ball.calculatePositionY(dt);
+                    ball.calculatePositionY(dt);
+                }
+                else{
+                    prevTime = System.nanoTime();
+                    //reseting ball variables
+                    ball.positionY = ball.initialPositionY;
+                    ball.velocityY = 0;
+                }
                 repaint();
             }
         }, 0, 16);

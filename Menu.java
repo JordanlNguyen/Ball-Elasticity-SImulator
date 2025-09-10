@@ -6,16 +6,16 @@ public class Menu {
     int height = 200;
     int positionX = 500;
     int positionY = 100;
-    private Sim sim;
-    private String buttonName = "START";
+    final Sim sim;
 
-    Button startButton = new Button(buttonName); //button will have START and RESTART
+    Button startButton = new Button("START"); //button will have START and RESTART
 
     public Menu(Sim sim){
         this.sim = sim; //stores the referenced sim in the Menu class private sim
         //start/restart button functionality
         startButton.setBounds(575, 200, 100, 50);
         startButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e){
                 changeButtonName();
                 System.out.println(sim.simStatus);
@@ -26,10 +26,10 @@ public class Menu {
     public void changeButtonName(){
         sim.simStatus = !sim.simStatus;
         if(sim.simStatus == true){
-            buttonName = "RESTART";
+            startButton.setLabel("RESTART");
         }
         else{
-            buttonName = "START";
+            startButton.setLabel("START");
         }
     }
 }

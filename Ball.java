@@ -5,13 +5,15 @@ public class Ball {
     double elasticity = .9; // leastElastic(0) -> mostElastic(1)
 
     double positionX;
+    double initialPositionY;
     double positionY;
     double velocityY;
 
     public Ball(){
         size = 20;
         positionX = 200;
-        positionY = 0;
+        initialPositionY = 50;
+        positionY = initialPositionY;
         velocityY = 0;
     }
 
