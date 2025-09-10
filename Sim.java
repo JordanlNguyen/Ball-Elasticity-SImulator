@@ -8,6 +8,7 @@ public class Sim extends Frame{
 
     Ball ball = new Ball();
     Menu menu = new Menu();
+    boolean simStatus = false; //true - sim is executing, false - sim is not executing
     long prevTime;
     
     public Sim(){
@@ -15,6 +16,9 @@ public class Sim extends Frame{
         setSize(750,750);
         setBackground(Color.BLACK);
         setResizable(false);
+        setLayout(null); //for manual positioning
+        add(menu.startButton);
+
         addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent e){
@@ -48,6 +52,8 @@ public class Sim extends Frame{
         //draw the ball
         g.setColor(Color.RED);
         g.fillOval((int)ball.positionX, (int)ball.positionY, ball.size, ball.size);
-        g.fillRect(400, 150, menu.width, menu.height);
+        //draw menu outline
+        g.setColor(Color.BLUE);
+        g.fillRect(menu.positionX, menu.positionY, menu.width, menu.height);
     }
 }
