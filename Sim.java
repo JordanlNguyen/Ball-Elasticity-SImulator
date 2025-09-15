@@ -9,20 +9,19 @@ public class Sim extends Frame{
 
     Ball ball = new Ball();
     boolean simStatus = false; //true - sim is executing, false - sim is not executing
-    Menu menu = new Menu(this);
+    Menu menu = new Menu(this, ball);
     long prevTime;
     final BufferedImage buffer = new BufferedImage(750, 750, BufferedImage.TYPE_4BYTE_ABGR);
     
     public Sim(){
+        //adding menu components
+        add(menu);
+        
         //initialize frame and exit function
         setSize(750,750);
         setBackground(Color.BLACK);
         setResizable(false);
         setLayout(null); //for manual positioning
-
-        //interactable components
-        add(menu.startButton);
-
 
         addWindowListener(new WindowAdapter(){
             @Override
@@ -75,9 +74,10 @@ public class Sim extends Frame{
         //draw the ball
         g2.setColor(Color.RED);
         g2.fillOval((int)ball.positionX, (int)ball.positionY, ball.size, ball.size);
-        //draw menu outline
-        g2.setColor(Color.BLUE);
-        g2.fillRect(menu.positionX, menu.positionY, menu.width, menu.height);
+        // //draw menu outline
+        // g2.setColor(Color.BLUE);
+        // g2.fillRect(menu.positionX, menu.positionY, menu.width, menu.height);
+
         g.drawImage(buffer, 0, 0, null);
         g2.dispose();
         /* g represents the frame, meaning anythin passed through g will be 

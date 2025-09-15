@@ -12,7 +12,7 @@ public class Ball {
     public Ball(){
         size = 20;
         positionX = 200;
-        initialPositionY = 50;
+        initialPositionY = 80; //max height : 30 , min height : 700 - size = 680
         positionY = initialPositionY;
         velocityY = 0;
     }
